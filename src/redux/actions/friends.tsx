@@ -55,10 +55,17 @@ export const friendReqSent = (fromId: number, toId: number) => (
     )
 }
 
-export const removeStatus = (statusId: number) => (dispatch: Dispatch) => {
+export const friendReqResponse = (statusId: number, decision: string) => (
+  dispatch: Dispatch
+) => {
+  // Validate that "decision" is either "approve" or "reject"
+  if (decision !== 'approve' || 'reject') {
+    throw new Error('Decision must be "approved" or "rejected')
+  }
+
   dispatch({ type: FR_RESPONSE_PENDING })
   axios
-    .delete(`http://localhost:8000/api/statuses/${statusId}`)
+    .patch(`http://localhost:8000/api/friend-request/${decision}/${statusId}`)
     .then(res =>
       dispatch({
         type: FR_RESPONSE_SUCCESS,

@@ -13,7 +13,7 @@ class App extends Component {
           <TopNav />
           <Switch>
             <Route path='/' exact component={LandingPage} />
-            <Route path='/dashboard/:user_id' exact component={MainDash} />
+            <Route path='/dashboard' exact component={MainDash} />
             <Route
               path='*'
               render={() => <div>404: Can't find what you're looking for</div>}
