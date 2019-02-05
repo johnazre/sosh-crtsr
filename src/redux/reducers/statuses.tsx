@@ -11,19 +11,23 @@ import {
 } from '../actions/statuses'
 import { Action } from 'redux'
 
-interface Status {
+export interface IStatus {
   author_id: number
   content: string
   imageUrl: string
   created_at: string
 }
 
-let initialState: Status[] = []
+interface StatusAction extends Action {
+  payload: IStatus[]
+}
 
-export default (state = initialState, action: Action) => {
+let initialState: IStatus[] = []
+
+export default (state = initialState, action: StatusAction) => {
   switch (action.type) {
     case FETCH_STATUSES_SUCCESS:
-
+      return action.payload
     default:
       return state
   }

@@ -24,7 +24,7 @@ let initialState = {
   isLoggedIn: true
 }
 
-export default (state = [], action: { type: string }) => {
+export default (state = initialState, action: { type: string }) => {
   switch (action.type) {
     default:
       return state

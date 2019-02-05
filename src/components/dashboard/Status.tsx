@@ -8,6 +8,9 @@ import {
   CardTitle,
   CardSubtitle
 } from 'reactstrap'
+import Moment from 'react-moment'
+
+import { IStatus } from '../../redux/reducers/statuses'
 
 const styles = {
   card: {
@@ -15,21 +18,28 @@ const styles = {
   }
 }
 
-const Status = (props: {}) => {
+interface Stuff extends IStatus {
+  name?: string
+}
+
+interface Props {
+  status: Stuff
+}
+
+const Status = (props: Props) => {
+  let { status } = props
   return (
     <Card style={styles.card}>
       <CardBody>
         <CardTitle>
-          <b>James Taylor</b>
+          <b>{status.name}</b>
         </CardTitle>
         <CardSubtitle>
-          <small>Yesterday</small>
+          <small>
+            <Moment fromNow>{status.created_at}</Moment>
+          </small>
         </CardSubtitle>
-        <CardText>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eget
-          varius ipsum. Aenean sagittis eget nulla suscipit vulputate. Phasellus
-          vel neque massa. Aliquam rutrum iaculis consectetur.
-        </CardText>
+        <CardText>{status.content}</CardText>
       </CardBody>
       {/* // TODO: Could add a button to send message to this person */}
     </Card>
